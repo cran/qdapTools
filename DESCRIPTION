@@ -1,7 +1,7 @@
 Package: qdapTools
 Type: Package
 Title: Tools for the qdap package.
-Version: 1.0.1
+Version: 1.0.2
 Date: 2014-04-19
 Authors@R: c(person("Bryan", "Goodrich", role = "ctb"), person("Dason",
     "Kurkiewicz", role = "ctb"), person("Kirill", "Muller", role = "ctb"),
@@ -17,11 +17,11 @@ Description: This package is a collection of tools associated with the qdap
 License: GPL-2
 URL: http://trinker.github.com/qdapTools/
 BugReports: http://github.com/trinker/qdapTools/issues
-Packaged: 2014-05-27 15:59:07 UTC; trinker
+Packaged: 2014-08-01 11:36:38 UTC; trinker
 Author: Bryan Goodrich [ctb],
   Dason Kurkiewicz [ctb],
   Kirill Muller [ctb],
   Tyler Rinker [aut, cre]
 NeedsCompilation: no
 Repository: CRAN
-Date/Publication: 2014-05-28 18:40:37
+Date/Publication: 2014-08-01 14:19:47
