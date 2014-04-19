@@ -17,6 +17,24 @@ And constructed with the following guidelines:
 * Bug fixes and misc changes bumps the patch
 
 
+
+qdapTools 1.0.1
+----------------------------------------------------------------
+
+BUG FIXES
+
+* `pad` did not work consistently across all platforms.  This behavior has been 
+  fixed.
+
+NEW FEATURES
+
+MINOR FEATURES
+
+IMPROVEMENTS
+
+CHANGES
+
+
 qdapTools 1.0.0
 ----------------------------------------------------------------
 
@@ -53,7 +71,7 @@ IMPROVEMENTS
 
 CHANGES
 
-* `The `%l*%` binary operator becomes deprecated as its behavior is no longer 
+* The `%l*%` binary operator becomes deprecated as its behavior is no longer 
   needed with the inclusion of the `data.table` package.  it will be removed in 
   a subsequent version of `qdapTools`.
 
