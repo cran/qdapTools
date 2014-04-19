@@ -1,0 +1,44 @@
+\name{text2color}
+\alias{text2color}
+\title{Map Words to Colors}
+\usage{
+text2color(words, recode.words, colors)
+}
+\arguments{
+  \item{words}{A vector of words.}
+
+  \item{recode.words}{A vector of unique words or a list of
+  unique word vectors that will be matched against
+  corresponding colors.}
+
+  \item{colors}{A vector of colors of equal in length to
+  recode.words + 1(the +1 is for unmatched words).}
+}
+\value{
+Returns a vector of mapped colors equal in length to the
+words vector.
+}
+\description{
+A dictionary lookup that maps words to colors.
+}
+\examples{
+x <- structure(list(X1 = structure(c(3L, 1L, 8L, 4L, 7L, 2L, 2L, 2L,
+    4L, 8L, 4L, 3L, 5L, 3L, 1L, 8L, 7L, 2L, 1L, 6L), .Label = c("a",
+    "and", "in", "is", "of", "that", "the", "to"), class = "factor")),
+    .Names = "X1", row.names = c(NA, -20L), class = "data.frame")
+
+#blue was recycled
+text2color(x$X1, c("the", "and", "is"), c("red", "green", "blue"))
+text2color(x$X1, c("the", "and", "is"), c("red", "green", "blue", "white"))
+x$X2 <- text2color(x$X1, list(c("the", "and", "is"), "that"),
+    c("red", "green", "white"))
+x
+}
+\seealso{
+\code{\link[qdap]{lookup}}
+}
+\keyword{color,}
+\keyword{dictionary}
+\keyword{lookup,}
+\keyword{recode,}
+
