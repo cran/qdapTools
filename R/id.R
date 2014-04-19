@@ -4,7 +4,9 @@
 #' \code{\link[base]{length}}/\code{\link[base]{ncol}} of an object.
 #' 
 #' @param x A dataframe, matrix, vector, or list object.
-#' @param prefix logical.  If \code{TRUE} an "X." is place before each id.
+#' @param prefix A character string to use as a prefix. \code{FALSE} or 
+#' \code{NULL} results in no prefix being used.  \code{TRUE} will utilize the 
+#' prefix \code{"X."}.
 #' @param pad logical.  If \code{TRUE} the beginning number will be padded with 
 #' zeros.
 #' @param \ldots Other arguments passed to \code{\link[qdapTools]{pad}}.
@@ -17,6 +19,7 @@
 #' id(mtcars)
 #' id(mtcars, TRUE)
 #' id("w")
+#' id(mtcars, prefix="id-")
 #' \dontrun{
 #' library(qdap)
 #' question_type(DATA.SPLIT$state, id(DATA.SPLIT, TRUE))
@@ -32,9 +35,11 @@ id <- function(x, prefix = FALSE, pad = TRUE, ...) {
     if (pad) {
         ids <- pad(ids, ...)
     }
-    if (prefix) {
-        ids <- paste("X", ids, sep=".")
+    if (!is.null(prefix) && is.character(prefix)) {
+        ids <- paste0(prefix, ids)
     } 
+    if (!is.null(prefix) && is.logical(prefix) && isTRUE(prefix)) {
+        ids <- ds <- paste("X", ids, sep=".")
+    } 	
     ids
 }
-

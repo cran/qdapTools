@@ -8,7 +8,9 @@ id(x, prefix = FALSE, pad = TRUE, ...)
 \arguments{
 \item{x}{A dataframe, matrix, vector, or list object.}
 
-\item{prefix}{logical.  If \code{TRUE} an "X." is place before each id.}
+\item{prefix}{A character string to use as a prefix. \code{FALSE} or
+\code{NULL} results in no prefix being used.  \code{TRUE} will utilize the
+prefix \code{"X."}.}
 
 \item{pad}{logical.  If \code{TRUE} the beginning number will be padded with
 zeros.}
@@ -28,6 +30,7 @@ id(matrix(1:10, ncol=1))
 id(mtcars)
 id(mtcars, TRUE)
 id("w")
+id(mtcars, prefix="id-")
 \dontrun{
 library(qdap)
 question_type(DATA.SPLIT$state, id(DATA.SPLIT, TRUE))
