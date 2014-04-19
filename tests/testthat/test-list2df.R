@@ -7,7 +7,7 @@ test_that("list2df gived intended output",{
             X2 = c("x", "x", "y", "y", "y", "y", "y")), .Names = c("X1", 
         "X2"), row.names = c(NA, -7L), class = "data.frame")
     
-    expect_identical(list2df(lst1), expected1)
+    expect_equivalent(list2df(lst1), expected1)
     
     lst2 <- list(a=c("hello", "everybody"), b = mtcars[1:6, 1])
     expected2 <- structure(list(`col 1` = c("hello", "everybody", "21", "21",     
@@ -15,7 +15,7 @@ test_that("list2df gived intended output",{
          "b", "b", "b", "b")), .Names = c("col 1", "col 2"), row.names = c(NA, 
          -8L), class = "data.frame") 
     
-    expect_identical(list2df(lst2, "col 1", "col 2"), expected2)
+    expect_equivalent(list2df(lst2, "col 1", "col 2"), expected2)
   
 })
 
@@ -30,7 +30,7 @@ test_that("matrix2df gived intended output",{
             `3` = 7:9), .Names = c("var1", "1", "2", "3"), row.names = c(NA, 
         -3L), class = "data.frame")
 
-    expect_identical(matrix2df(matrix(1:9, ncol=3)), expected4)
+    expect_equivalent(matrix2df(matrix(1:9, ncol=3)), expected4)
 })
 
 
@@ -41,14 +41,14 @@ test_that("vect2df gived intended output",{
         X2 = 1:10), .Names = c("X1", "X2"), row.names = c(NA, -10L
     ), class = "data.frame")
 
-    expect_identical(vect2df(1:10), expected5)
+    expect_equivalent(vect2df(1:10), expected5)
     expect_true(is.data.frame(vect2df(1:10)))
-    expect_identical(vect2df(1:10)[, 1], factor(paste0("x", pad(1:10))))
+    expect_equivalent(vect2df(1:10)[, 1], factor(paste0("x", pad(1:10))))
 })
 
 test_that("list_df2df gived intended output",{
 	
-    expect_identical(
+    expect_equivalent(
         list_df2df(list(mtcars, mtcars)),
         data.frame(X1=rep(paste0("L", 1:2), each=nrow(mtcars)), 
             rbind(mtcars, mtcars), row.names=NULL, stringsAsFactors = FALSE)
@@ -70,7 +70,7 @@ test_that("list_vect2df gived intended output",{
         4L, 5L, 6L, 5L, 6L, 7L, 8L)), .Names = c("X1", "X2", "X3"
     ), row.names = c(NA, -20L), class = "data.frame")
 
-    expect_identical(list_vect2df(L1), expected6)
+    expect_equivalent(list_vect2df(L1), expected6)
 	
     L2 <- list(
         months=setNames(1:12, month.abb),
@@ -115,13 +115,13 @@ test_that("vect2list gived intended output",{
         D = "D"), .Names = c("A", "B", "C", "D"))
 
 
-    expect_identical(l, expected7)
+    expect_equivalent(l, expected7)
 
 
     expected8 <- structure(list(`1` = "A", `2` = "B", `3` = "C", 
         `4` = "D"), .Names = c("1", "2", "3", "4"))
 
-    expect_identical(m, expected8)
+    expect_equivalent(m, expected8)
 
 })
 
@@ -134,19 +134,30 @@ test_that("df2matrix gived intended output",{
     
     df2matrix(cnts)
     m <- df2matrix(cnts)
-    expect_true(identical(rownames(m), cnts[, 1]))
+    expect_equivalent(rownames(m), cnts[, 1])
     expect_true(is.matrix(m))
     expect_true(mode(m) == "numeric")
 
     m2 <- df2matrix(cnts, 2)
-    expect_true(identical(as.integer(rownames(m2)), cnts[, 2]))
+    expect_equivalent(as.integer(rownames(m2)), cnts[, 2])
     expect_true(is.matrix(m2))
     expect_true(mode(m2) == "character")
 
     m3 <- df2matrix(cnts, "X2")
-    expect_true(identical(as.integer(rownames(m3)), cnts[, 3]))
+    expect_equivalent(as.integer(rownames(m3)), cnts[, 3])
     expect_true(is.matrix(m3))
     expect_true(mode(m3) == "character")
 	
 })
 
+test_that("matrix2long gived intended output",{
+    
+    exmat <- structure(list(cols = c("1", "1", "1", "2", "2", "2", "3", "3", 
+        "3"), rows = c("1", "2", "3", "1", "2", "3", "1", "2", "3"), 
+            vals = 1:9), .Names = c("cols", "rows", "vals"), row.names = c(NA, 
+        -9L), class = "data.frame")
+    
+    mat <- matrix(1:9, ncol=3)
+    expect_equivalent(matrix2long(mat), exmat)
+    
+})

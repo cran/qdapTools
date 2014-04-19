@@ -26,9 +26,8 @@ test_that("lookup works with lists",{
         C = 7,
         D = c(6, 8:10)
     )
-    
-    expect_true(identical(lookup(1:10, codes), 
-    	c("A", "A", "B", "A", "B", "D", "C", "D", "D", "D")))
+    expect_equivalent(lookup(1:10, codes), 
+        c("A", "A", "B", "A", "B", "D", "C", "D", "D", "D"))
 
 })
 
@@ -37,19 +36,18 @@ test_that("lookup works with when terms mode and col 2 mode not the same",{
 	
     m <- c("100", "101", "102", "103", "E")
 
-    expect_true(identical(m, 
+    expect_equivalent(m, 
     	lookup(LETTERS[1:5], data.frame(LETTERS[1:4], 100:103), missing=NULL)
-    ))
-    expect_true(identical(m,     	
+    )
+    expect_equivalent(m,     	
         lookup(LETTERS[1:5], factor(LETTERS[1:4]), 100:103, missing=NULL)
-    ))
+    )
 })
 
 test_that("lookup works with single length inputs",{
 	
     m2 <- lookup("New Jersey", data.frame(c("New Jersey", "foo"), c("NJ", "bar"), 
     	stringsAsFactors = FALSE), missing=NULL)
-    expect_identical(m2, "NJ")
+    expect_equivalent(m2, "NJ")
 })
-
 
