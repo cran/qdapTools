@@ -16,10 +16,23 @@ And constructed with the following guidelines:
   (and resets the patch)
 * Bug fixes and misc changes bumps the patch
 
-qdapTools 0.0.3
+qdapTools 0.1.0
 ----------------------------------------------------------------
 
-BUG FIXES
+This release moves the `list2df` family of functions from `qdap` to qdapTools.  
+This completes the process of moving generic `qdap` tools into a separate the
+qdapTools package.
+
+CHANGES
+
+* The `list2df` family of functions have been moved from `qdap` to `qdapTools`.
+  These functions include: `list2df`, `matrix2df`, `vect2df`, `list_df2df`, 
+  `list_vect2df`, `counts2list`, & `vect2list`.
+
+
+
+qdapTools 0.0.3
+----------------------------------------------------------------
 
 NEW FEATURES
 
@@ -28,12 +41,6 @@ NEW FEATURES
 
 * `pad` a convenience wrapper for `sprintf` that pads the front end of strings 
   with spaces or 0s.
-
-MINOR FEATURES
-
-IMPROVEMENTS
-
-CHANGES
 
 
 qdapTools 0.0.2
