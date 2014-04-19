@@ -16,11 +16,38 @@ And constructed with the following guidelines:
   (and resets the patch)
 * Bug fixes and misc changes bumps the patch
 
+
+
+qdapTools 0.2.0
+----------------------------------------------------------------
+
+This version of qdapTools highlights optimization of `lookup` and `v_outer`.
+It also adds the `mtabulate` function from the qdap package.  Future development 
+will revolve around further optimization of `lookup` and `v_outer`.  `lookup` 
+may utilize the **data.table** package to gain speed. 
+
+IMPROVEMENTS
+
+* `lookup` and `hash_look` family of functions gains a major speed boost thanks 
+  to @Arun Srinivasan.  See: https://gist.github.com/arunsrinivasan/ee2d9ef43bdc02c32958
+
+* `lookup` becomes a generic method that operates on various classes.  This 
+  gains a slight speed boost.
+
+* `v_outer` becomes a generic method that operates on various classes.  This 
+  gains a slight speed boost.
+
+CHANGES
+
+* `mtabulate` moved from `qdap` to `qdapTools`.
+
+
+
 qdapTools 0.1.0
 ----------------------------------------------------------------
 
 This release moves the `list2df` family of functions from `qdap` to qdapTools.  
-This completes the process of moving generic `qdap` tools into a separate the
+This completes the process of moving generic `qdap` tools into a separate 
 qdapTools package.
 
 CHANGES
@@ -57,6 +84,6 @@ qdapTools 0.0.1
 ----------------------------------------------------------------
 
 Tools used by qdap that may be of use outside of the context of text analysis 
-realated tasks, have been moved to a separate package, qdapTools.  This is the 
+related tasks, have been moved to a separate package, qdapTools.  This is the 
 first installment of the package.
 

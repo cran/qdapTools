@@ -4,9 +4,27 @@
 \alias{\%l+\%}
 \alias{\%l\%}
 \alias{lookup}
+\alias{lookup.character}
+\alias{lookup.data.frame}
+\alias{lookup.list}
+\alias{lookup.matrix}
+\alias{lookup.numeric}
 \title{Hash Table/Dictionary Lookup}
 \usage{
 lookup(terms, key.match, key.reassign = NULL, missing = NA)
+
+\method{lookup}{matrix}(terms, key.match, key.reassign = NULL, missing = NA)
+
+\method{lookup}{data.frame}(terms, key.match, key.reassign = NULL,
+  missing = NA)
+
+\method{lookup}{list}(terms, key.match, key.reassign = NULL, missing = NA)
+
+\method{lookup}{numeric}(terms, key.match, key.reassign = NULL,
+  missing = NA)
+
+\method{lookup}{character}(terms, key.match, key.reassign = NULL,
+  missing = NA)
 
 terms \%l\% key.match
 
@@ -68,10 +86,10 @@ codes <- list(
 
 lookup(1:10, codes)
 
-## Supply a single vector to key.match and key.assign
+## Supply a single vector to key.match and key.reassign
 
 lookup(mtcars$carb, sort(unique(mtcars$carb)),
-    c('one', 'two', 'three', 'four', 'six', 'eight'))
+    c("one", "two", "three", "four", "six", "eight"))
 
 lookup(mtcars$carb, sort(unique(mtcars$carb)),
     seq(10, 60, by=10))

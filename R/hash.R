@@ -60,13 +60,19 @@ hash_help <- function(x, mode.out) {
 #' @export
 #' @rdname hash
 hash_look <- function(terms, envir, missing = NA) {
-    unlist(lapply(as.character(terms), function(x) {
-        if (exists(x, envir = envir)) {
-            get(x, envir = envir)
-        } else {
-            missing
-        }
-    }))
+	
+    hits <- which(!is.na(match(terms, names(as.list(envir)))))
+    x <- rep(ifelse(is.null(missing), NA, missing), length(terms))
+	
+    x[hits] <- recoder(terms[hits], envr = envir)
+
+    if (is.null(missing)) { 
+    	keeps <- which(is.na(x))
+        x[keeps] <- terms[keeps]
+        x
+    }   
+    x
+	
 }
 
 #' Hash/Dictionary Lookup
@@ -76,3 +82,5 @@ hash_look <- function(terms, envir, missing = NA) {
 #' @export
 #' @rdname hash
 `%ha%` <- function(terms, envir) hash_look(terms = terms, envir = envir)
+
+
