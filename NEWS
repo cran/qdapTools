@@ -17,6 +17,20 @@ And constructed with the following guidelines:
 * Bug fixes and misc changes bumps the patch
 
 
+qdapTools 1.0.3
+----------------------------------------------------------------
+
+BUG FIXES
+
+* `lookup` threw an error with single length input `terms` and `missing=NULL`
+  (see issue #6 for more).  This behavior has been fixed. 
+
+* `lookup` changed the order of existing `data.frames` because of `data.table`'s
+  scoping which modifies data in place.  This was spotted by Kirill Muller (see
+  issue #7) and a solution provided by Matthew Flickinger 
+  (http://stackoverflow.com/a/26046777/1000343).
+
+
 qdapTools 1.0.2
 ----------------------------------------------------------------
 
@@ -31,15 +45,12 @@ NEW FEATURES
 * `split_vector` added to split a `vector` into a list of vectors based on split 
   points.
 
-MINOR FEATURES
-
 IMPROVEMENTS
 
 * `list2df` would return `rownames` matching the names of the original list 
   rather than numeric indexes.  `row.names = FALSE` was added to the call to
   `data.frame` to correct this.
 
-CHANGES
 
 qdapTools 1.0.1
 ----------------------------------------------------------------

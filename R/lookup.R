@@ -112,7 +112,7 @@ function (terms, key.match, key.reassign = NULL, missing = NA) {
         FALSE
     })
 	
-    if(length(out_warn) == 1 && !out_warn) return(FUN(output))
+    if(length(out_warn) == 1 && !isTRUE(out_warn)) return(FUN(output))
 	
     attributes(output) <- NULL
     output
@@ -146,7 +146,7 @@ function (terms, key.match, key.reassign = NULL, missing = NA) {
         FALSE
     })
 	
-    if(length(out_warn) == 1 && !out_warn) return(FUN(output))
+    if(length(out_warn) == 1 && !isTRUE(out_warn)) return(FUN(output))
 	
     attributes(output) <- NULL
     output
@@ -180,7 +180,7 @@ function (terms, key.match, key.reassign = NULL, missing = NA) {
         FALSE
     })
 	
-    if(length(out_warn) == 1 && !out_warn) return(FUN(output))
+    if(length(out_warn) == 1 && !isTRUE(out_warn)) return(FUN(output))
 	
     attributes(output) <- NULL
     output
@@ -215,7 +215,7 @@ function(terms, key.match, key.reassign, missing = NA) {
         FALSE
     })
 	
-    if(length(out_warn) == 1 && !out_warn) return(FUN(output))
+    if(length(out_warn) == 1 && !isTRUE(out_warn)) return(FUN(output))
 	
     attributes(output) <- NULL
     output
@@ -249,7 +249,7 @@ function(terms, key.match, key.reassign, missing = NA) {
         FALSE
     })
 	
-    if(length(out_warn) == 1 && !out_warn) return(FUN(output))
+    if(length(out_warn) == 1 && !isTRUE(out_warn)) return(FUN(output))
 	
     attributes(output) <- NULL
     output
@@ -283,7 +283,7 @@ function(terms, key.match, key.reassign, missing = NA) {
         FALSE
     })
 	
-    if(length(out_warn) == 1 && !out_warn) return(FUN(output))
+    if(length(out_warn) == 1 && !isTRUE(out_warn)) return(FUN(output))
 	
     attributes(output) <- NULL
     output
@@ -296,7 +296,7 @@ lookup_helper <- function(terms, key, missing = NA) {
 	x <- i.y <- NULL
 	
     terms <- data.frame(x=terms, stringsAsFactors = FALSE)
-    setDT(key)
+    key <- data.table::data.table(key[c("x", "y")])
     setDT(terms)
  
     setkey(key, x)
