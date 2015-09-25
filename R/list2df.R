@@ -182,7 +182,7 @@ list_vect2df <- function(list.vector.object, col1 = "X1", col2 = "X2",
         list.vector.object[fct] <- lapply(list.vector.object[fct], as.character)
     }
     cls <- class(unlist(list.vector.object))
-    list.vector.object <- lapply(list.vector.object, as, cls)
+    list.vector.object <- lapply(list.vector.object, methods::as, cls)
 
     list_df2df(lapply(list.vector.object, vect2df, col1=col2, col2=col3, 
     	order=order, ...), col1=col1)
@@ -199,11 +199,17 @@ list_vect2df <- function(list.vector.object, col1 = "X1", col2 = "X2",
 #' @return \code{counts2list} - Returns a list of elements.
 #' @export
 counts2list <- function(mat, nm = rownames(mat)) {
-    setNames(lapply(1:nrow(mat), function(i) {
-        x <- mat[i,, drop=FALSE]
-        rep(colnames(x)[x > 0], x[x > 0])
-    }),  nm = nm)
+    nms <- colnames(mat)
+    stats::setNames(apply(mat, 1, function(x) rep(nms, x)),  nm = nm)
 }
+
+#counts2list <- function(mat, nm = rownames(mat)) {
+#    stats::setNames(lapply(1:nrow(mat), function(i) {
+#        x <- unlist(mat[i, , drop = FALSE])
+#        x <- x[x > 0]
+#        rep(names(x), x)
+#    }),  nm = nm)
+#}
 
 
 #' List/Matrix/Vector to Dataframe/List/Matrix
@@ -225,12 +231,12 @@ vect2list <- function(vector.object, use.names = TRUE, numbered.names = FALSE){
     }
 
     if (!is.null(names(vector.object)) && use.names) {
-        setNames(as.list(vector.object), names(vector.object))
+        stats::setNames(as.list(vector.object), names(vector.object))
     } else {
         if (numbered.names) {
-            setNames(as.list(vector.object), pad(1:length(vector.object)))
+            stats::setNames(as.list(vector.object), pad(1:length(vector.object)))
         } else {
-            setNames(as.list(vector.object), as.character(vector.object))
+            stats::setNames(as.list(vector.object), as.character(vector.object))
         }
     }
 }
@@ -277,7 +283,7 @@ matrix2long <- function(matrix.object, col1 = "cols", col2 = "rows", col3 = "val
         colnames(matrix.object) <- seq_len(ncol(matrix.object))
     }
 
-    out <- setNames(data.frame(
+    out <- stats::setNames(data.frame(
         rep(colnames(matrix.object), each=nrow(matrix.object)),
         rep(rownames(matrix.object), ncol(matrix.object)),
         c(unlist(matrix.object)), 

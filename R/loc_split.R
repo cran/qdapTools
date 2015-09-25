@@ -12,8 +12,9 @@
 #' @note Two dimensional object will retain dimension (i.e., \code{drop = FALSE} 
 #' is used). 
 #' @export
-#' @seealso \code{\link[qdapTools]{split_vector}},
-#' \url{https://github.com/trinker/loc_split_example} for real life use.
+#' @seealso \code{\link[qdapTools]{run_split}},
+#' \code{\link[qdapTools]{split_vector}}
+#' \url{https://github.com/trinker/loc_split_example} for practical usage.
 #' @examples
 #' ## character
 #' loc_split(LETTERS, c(4, 10, 16))
@@ -130,14 +131,19 @@ function(x, locs, names = NULL, ...) {
     out
 }
 
-loc_split_vector <-
-function(x, locs, names = NULL, ...) {
-
-    locs <- locs[!locs %in% "1"]		
-    if (length(x) < max(locs)) stop("One or more `locs` elements exceeds length of `x`")
-    setNames(split(x, cut(seq_along(x), c(0, locs - 1, length(x)))) , NULL)
-
+loc_split_vector <- function(x, locs){
+    starts <- c(1, locs)
+    Map(function(s, e) {x[s:e]}, starts, c(locs - 1, length(x)))
 }
+
+## loc_split_vector <- #old version retired 9/9/15
+## function(x, locs, names = NULL, ...) {
+## 
+##     locs <- locs[!locs %in% "1"]		
+##     if (length(x) < max(locs)) stop("One or more `locs` elements exceeds length of `x`")
+##     stats::setNames(split(x, cut(seq_along(x), c(0, locs - 1, length(x)))) , NULL)
+## 
+## }
 
 loc_split_mat <- 
 function(x, locs, names = NULL, ...) {
@@ -145,12 +151,25 @@ function(x, locs, names = NULL, ...) {
     locs <- locs[!locs %in% "1"]		
     len <- nrow(x)
     if (len < max(locs)) stop("One or more `locs` elements exceeds nrow of `x`")
-    seqs <- seq_len(len)
 
-    splitseqs <- split(seqs, cut(seqs, c(0, locs - 1, len)))
-    setNames(lapply(splitseqs, function(i) x[i, ,drop=FALSE]), NULL)
+    starts <- c(1, locs)
+    Map(function(s, e) {x[s:e, ,drop=FALSE]}, starts, c(locs - 1, nrow(x)))
 
 }
+
+## loc_split_mat <- #old version retired 9/9/15
+## function(x, locs, names = NULL, ...) {
+## 
+##     locs <- locs[!locs %in% "1"]		
+##     len <- nrow(x)
+##     if (len < max(locs)) stop("One or more `locs` elements exceeds nrow of `x`")
+##     seqs <- seq_len(len)
+## 
+##     splitseqs <- split(seqs, cut(seqs, c(0, locs - 1, len)))
+##     stats::setNames(lapply(splitseqs, function(i) x[i, ,drop=FALSE]), NULL)
+## 
+## }
+
 
 name_len_check <- function(locs, names) {
     

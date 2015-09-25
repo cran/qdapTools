@@ -16,19 +16,40 @@ And constructed with the following guidelines:
   (and resets the patch)
 * Bug fixes and misc changes bumps the patch
 
+qdapTools 1.3.0
+----------------------------------------------------------------
+
+NEW FEATURES
+
+* `read_docx` added to read in .docx dcouments.
+
+* `start_end` added to find the locations of start/end places for the ones in a 
+  binary vector.
+
+* `run_split` added to split a string into run chunks.
+
+* `shift`, `shift_left`, and `shift_right` added to shift vectors.
+
+IMPROVEMENTS
+
+* `counts2list` now uses `apply` and gains a speed boost.
+
+* `loc_split`  picks up a speed boost thanks to indexing and dropping a reliance 
+  on `cut` + `split`.
+
 qdapTools 1.0.4 - 1.1.0
 ----------------------------------------------------------------
 
 NEW FEATURES
 
 * `loc_split` added to split data forms (`list`, `vector`, `data.frame`, 
-  `matrix`) on a vector of integer lcoations.
+  `matrix`) on a vector of integer locations.
 
 * `matrix2long` makes a long format data.frame.  It takes a matrix object, stacks 
   all columns and adds identifying columns by repeating row and column names
   accordingly.  
 
-* `read_docx` added to read in .docx dcouments.
+* `run_split` added to split strings into runs.
 
 
 IMPROVEMENTS

@@ -14,9 +14,10 @@
 #' @param \ldots other arguments passed to \code{\link[base]{grep}} and
 #' \code{\link[base]{grepl}}.
 #' @return Returns a list of vectors. 
+#' @seealso \code{\link[qdapTools]{loc_split}},
+#' \code{\link[qdapTools]{run_split}}
 #' @author Matthew Flickinger and Tyler Rinker <tyler.rinker@@gmail.com>.
 #' @references \url{http://stackoverflow.com/a/24319217/1000343} 
-#' @seealso \code{\link[qdapTools]{loc_split}}
 #' @export
 #' @examples
 #' set.seed(15)
