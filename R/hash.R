@@ -1,6 +1,6 @@
 #' Hash/Dictionary Lookup
 #'
-#' \code{hash} - Creates a \href{http://datatable.r-forge.r-project.org/}{\pkg{data.table}}
+#' \code{hash} - Creates a \href{https://github.com/Rdatatable/data.table/wiki}{\pkg{data.table}}
 #' based hash table for quick hash style dictionary lookup.
 #'
 #' @param x A two column dataframe.
@@ -110,7 +110,26 @@ hash_look <- function(terms, key, missing = NA) {
 #' @rdname hash
 `%hl+%` <- function(terms, key) hash_look(terms = terms, key = key, missing=NULL)
 
+#' Hash/Dictionary Lookup
+#'
+#' \code{\%ha\%} - A deprecated binary operator version of \code{hash_look}.
+#' This will be removed in a subsequent version of \pkg{qdapTools}.  Use
+#' \code{\%hl\%} instead.
+#'
+#' @param terms A vector of terms to undergo a lookup.
+#' @param key The hash key to use.
+#' @param key.match Takes one of the following: (1) a two column data.frame of a
+#' match key and reassignment column, (2) a named list of vectors (Note: if
+#' data.frame or named list supplied no key reassign needed) or (3) a single
+#' vector match key.
+#' @export
+#' @rdname Deprecated
+`%ha%` <- function(terms, key) {
+    .Deprecated(msg = paste("`%ha%` is deprecated.  Please use `%hl%` instead."),
+    	old = as.character(sys.call(sys.parent()))[1L])
 
+	hash_look(terms = terms, key = key)
+}
 
 ### Helper function
 #' @importFrom data.table setDT
